@@ -1,8 +1,9 @@
 {
   "name": "reader-frontend",
   "version": "1.0.0",
-  "description": "Frontend for blog readers",
-  "main": "index.jsx",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -10,19 +11,16 @@
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "blog",
-    "frontend",
-    "reader"
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^18.3.1", 
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^4.5.5"
+    "vite": "^6.0.3"
   }
 }

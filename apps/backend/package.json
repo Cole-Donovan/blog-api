@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "seed": "node prisma/seed.js",
+    "clear-and-seed": "node prisma/seed.js && echo 'Database cleared and seeded!'",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,10 +17,12 @@
   ],
   "author": "",
   "license": "ISC",
+  "type": "module", 
   "dependencies": {
     "@prisma/client": "^6.0.1",
     "bcryptjs": "^2.4.3",
-    "express": "^4.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "prisma": "^6.0.1"
   },
