@@ -5,38 +5,24 @@ const prisma = new PrismaClient();
 // Fetch all posts
 const getPosts = async (req, res) => {
   try {
+    const { published } = req.query; // Query parameter for filtering posts
+
     const posts = await prisma.post.findMany({
       where: {
-        published: true, // Only fetch published posts
+        ...(published !== undefined && { published: published === 'true' }), // Apply filter if `published` is provided
       },
       include: {
-        author: {  // Include author (user with role "AUTHOR")
-          select: {
-            id: true,
-            email: true,
-            name: true, // Include name if present
-          },
-        },
-        comments: {  // Include comments for each post
-          include: {
-            user: {  // Include commenter details
-              select: {
-                id: true,
-                name: true,
-                email: true,
-              },
-            },
-          },
-        },
+        author: { select: { id: true, name: true, email: true } }, // Include author info (customize as needed)
       },
     });
 
-    res.json(posts);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error fetching posts' });
+    res.status(200).json(posts);
+  } catch (err) {
+    console.error("Error fetching posts:", err);
+    res.status(500).json({ error: 'Failed to fetch posts' });
   }
 };
+
 
 
 // Create a post
@@ -57,6 +43,7 @@ const createPost = async (req, res) => {
       data: {
         title,
         content,
+        published: false,  // You can change this logic to handle post publishing status
         authorId: req.user.userId, // Link post to the authenticated user (author)
       },
     });

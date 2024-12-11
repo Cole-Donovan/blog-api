@@ -1,9 +1,13 @@
-// src/App.jsx
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import HomePage from "./pages/Home";
+import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import CreatePostPage from "./pages/CreatePostPage";
+import DraftsPage from "./pages/DraftsPage";
+
 
 function App() {
   const [token, setToken] = useState(null);
@@ -17,20 +21,52 @@ function App() {
   }, []);
 
   const handleLogout = () => {
+    console.log("Logging out...");
+
+    // Clear token and role from localStorage
     localStorage.removeItem("token");
-    setToken(null); // Reset token state
+    localStorage.removeItem("role");
+
+    // Update state and log out
+    setToken(null);
+
+    console.log("Logged out successfully, token and role removed.");
   };
 
   return (
     <BrowserRouter>
       <Routes>
+        {/* Wrap all pages in Layout, passing handleLogout to Layout */}
         <Route path="/" element={<Layout onLogout={handleLogout} />}>
+          {/* Protected routes for authors */}
           <Route
             index
-            element={token ? <HomePage /> : <LoginPage />}
+            element={
+              <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                <HomePage />
+              </ProtectedRoute>
+            }
           />
+          <Route
+            path="create-post"
+            element={
+              <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                <CreatePostPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="drafts"
+            element={
+              <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                <DraftsPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* Public routes */}
+          <Route path="login" element={<LoginPage setToken={setToken} />} />
+          <Route path="signup" element={<SignUpPage />} />
         </Route>
-        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

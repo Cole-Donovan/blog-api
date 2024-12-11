@@ -1,12 +1,22 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
-function Layout() {
+function Layout({ onLogout }) {
+  const navigate = useNavigate(); // Get navigate function here
+
+  const handleLogout = () => {
+    // Call the parent onLogout function to clear token and role
+    onLogout();
+
+    // Redirect to login page after logout
+    navigate("/login");
+  };
+
   return (
     <div>
-      <Header />
+      <Header onLogout={handleLogout} />
       <main>
         <Outlet />
       </main>

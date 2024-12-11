@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ onLogout }) {
   return (
     <header>
       <nav>
         <Link to="/">Home</Link>
-        {/* Add more links here */}
+        <Link to="/create-post">Create Post</Link> {/* Link to the create post page */}
+        <Link to="/drafts">Drafts</Link>
+        <button onClick={onLogout}>Logout</button> {/* Logout button */}
       </nav>
     </header>
   );

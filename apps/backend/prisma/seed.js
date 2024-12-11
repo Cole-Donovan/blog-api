@@ -6,11 +6,8 @@ async function clearDatabase() {
   // Delete comments first, as they depend on posts
   await prisma.comment.deleteMany({});
   
-  // Then delete posts, as they depend on users
+  // Then delete posts
   await prisma.post.deleteMany({});
-  
-  // Finally, delete users
-  await prisma.user.deleteMany({});
   
   console.log('Database cleared!');
 }
@@ -18,36 +15,21 @@ async function clearDatabase() {
 async function seedDatabase() {
   console.log('Seeding the database...');
 
-  // Create some users (authors and commenters)
-  const author1 = await prisma.user.create({
-    data: {
-      email: 'author1@example.com',
-      password: 'securepassword1', // Remember to hash passwords in production
-      name: 'Author One',
-      role: 'AUTHOR',
-    },
+  // Assuming users already exist in the database
+  const author1 = await prisma.user.findUnique({
+    where: { email: 'author1@example.com' },
   });
 
-  const author2 = await prisma.user.create({
-    data: {
-      email: 'author2@example.com',
-      password: 'securepassword2', // Hash password in production
-      name: 'Author Two',
-      role: 'AUTHOR',
-    },
+  const author2 = await prisma.user.findUnique({
+    where: { email: 'author2@example.com' },
   });
 
-  const commenter = await prisma.user.create({
-    data: {
-      email: 'commenter@example.com',
-      password: 'securepassword3', // Hash password in production
-      name: 'Commenter One',
-      role: 'COMMENTER',
-    },
-  });
+  if (!author1 || !author2) {
+    throw new Error('Required authors are missing from the database.');
+  }
 
-  // Create some posts with authors
-  const post1 = await prisma.post.create({
+  // Create posts
+  await prisma.post.create({
     data: {
       title: 'First Post',
       content: 'This is the first post content.',
@@ -56,7 +38,7 @@ async function seedDatabase() {
     },
   });
 
-  const post2 = await prisma.post.create({
+  await prisma.post.create({
     data: {
       title: 'Second Post',
       content: 'This is the second post content.',
@@ -65,24 +47,7 @@ async function seedDatabase() {
     },
   });
 
-  // Create some comments with authorship
-  await prisma.comment.create({
-    data: {
-      text: 'Great post!',
-      postId: post1.id,
-      userId: commenter.id, // Link comment to commenter
-    },
-  });
-
-  await prisma.comment.create({
-    data: {
-      text: 'Very informative, thanks!',
-      postId: post1.id,
-      userId: author1.id, // Authors can also comment
-    },
-  });
-
-  console.log('Database has been seeded!');
+  console.log('Database has been seeded with posts!');
 }
 
 async function main() {

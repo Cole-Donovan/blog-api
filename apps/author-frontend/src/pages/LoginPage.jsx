@@ -1,12 +1,12 @@
-// src/pages/LoginPage.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 
 const LoginPage = () => {
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState(""); // Error state
+  const navigate = useNavigate(); // Navigate hook
 
+  // Handle the login logic
   const handleLogin = async (email, password) => {
     try {
       const response = await fetch("http://localhost:3000/auth/login", {
@@ -18,12 +18,22 @@ const LoginPage = () => {
       });
 
       const data = await response.json();
+
+      // Log the entire response data for comparison
+      console.log("Login response data:", data);
+
       if (response.ok) {
-        // Save the JWT token in localStorage
+        // Save the token and role in localStorage
         localStorage.setItem("token", data.token);
-        navigate("/"); // Redirect to the home page after login
+        localStorage.setItem("role", data.role);
+
+        // Log the user role after storing it in localStorage
+        // console.log("User role:", data.role);
+
+        // Navigate to the homepage
+        navigate("/");
       } else {
-        setError(data.error || "Something went wrong");
+        setError(data.error || "Login failed");
       }
     } catch (err) {
       setError("Failed to connect to the backend");
@@ -33,6 +43,7 @@ const LoginPage = () => {
   return (
     <div>
       <LoginForm onLogin={handleLogin} error={error} />
+      <button onClick={() => navigate("/signup")}>Create an Account</button>
     </div>
   );
 };

@@ -4,7 +4,10 @@ import authenticateToken from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', getPosts); // Fetch all posts
-router.post('/', authenticateToken, createPost); // Create a post (protected)
+// Route to fetch all published posts
+router.get('/', getPosts);
+
+// Route to create a post (protected, requires authentication)
+router.post('/', authenticateToken, createPost);
 
 export default router;

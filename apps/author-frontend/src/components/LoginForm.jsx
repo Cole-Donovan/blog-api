@@ -1,40 +1,38 @@
-// src/components/LoginForm.jsx
-import { useState } from "react";
+import React, { useState } from "react";
 
 const LoginForm = ({ onLogin, error }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(""); // Email state
+  const [password, setPassword] = useState(""); // Password state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await onLogin(email, password);
+    // Call the onLogin prop with email and password
+    onLogin(email, password);
   };
 
   return (
     <div>
       <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
+          <label>Email:</label>
           <input
             type="email"
-            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label>Password:</label>
           <input
             type="password"
-            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
+        {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error */}
         <button type="submit">Login</button>
       </form>
     </div>
