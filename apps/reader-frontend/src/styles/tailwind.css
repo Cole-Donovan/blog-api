@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles for Headings */
+h1 {
+  @apply text-4xl font-bold mb-4; /* Most important header */
+}
+
+h2 {
+  @apply text-3xl font-semibold mb-3; /* Slightly darker */
+}
+
+h3 {
+  @apply text-2xl font-semibold mb-3; /* White text for consistency */
+}
+
+h4 {
+  @apply text-xl font-semibold mb-2; /* White text for consistency */
+}
+
+h5 {
+  @apply text-lg font-medium mb-2; /* White text for consistency */
+}
+
+h6 {
+  @apply text-base font-medium mb-2; /* White text for consistency */
+}
+
+p {
+  @apply text-base mb-4; /* Default to white text for paragraphs */
+}
+
+body, html, a, ul, ol, li, small, .text-sm, .text-xs, svg:hover {
+  @apply text-white; /* Standardized white text */
+}
+
+[data-theme="light"] svg, [data-theme="light"] body, [data-theme="light"] html, [data-theme="light"] a, [data-theme="light"] ul, [data-theme="light"] ol, [data-theme="light"] li, [data-theme="light"] small, [data-theme="light"] .text-sm, [data-theme="light"] .text-xs {
+  @apply text-black; /* Standardized black text for light mode */
+}
+
+/* Hover effects for links and buttons */
+a:hover, button:hover {
+  @apply text-gray-200; /* Slightly lighter on hover */
+}
+
+[data-theme="light"] a:hover, [data-theme="light"] button:hover {
+  @apply text-gray-800; /* Darker hover effect on light theme */
+}
+
+input, textarea {
+  @apply mb-2 w-full text-black px-4 py-2 border rounded-lg focus:ring-2 focus:ring-theme-500 focus:outline-none;
+}
+
+
+[data-theme="dark"] {
+  --color-theme-100: #f5f5f4;
+  --color-theme-200: #e7e5e4;
+  --color-theme-300: #d6d3d1;
+  --color-theme-400: #a8a29e;
+  --color-theme-500: #78716c;
+  --color-theme-600: #57534e;
+  --color-theme-700: #44403c;
+  --color-theme-800: #292524;
+  --color-theme-900: #1c1917;
+}
+
+[data-theme="light"] {
+  --color-theme-100: #FFFFFF;
+  --color-theme-200: #FFFFFF;
+  --color-theme-300: #FFFFFF;
+  --color-theme-400: #FFFFFF;
+  --color-theme-700: #FFFFFF;
+  --color-theme-600: #F0F0F0;
+  --color-theme-800: #E0E0E0;
+  --color-theme-500: #D1D1D1;
+  --color-theme-900: #C2C2C2;
+}
+
+
+[data-theme="red"] {
+  --color-theme-100: #ffddde;
+  --color-theme-200: #ffbcbe;
+  --color-theme-300: #ff9a9d;
+  --color-theme-400: #ff787d;
+  --color-theme-500: #ff595e;
+  --color-theme-600: #ff121a;
+  --color-theme-700: #cd0007;
+  --color-theme-800: #890005;
+  --color-theme-900: #440002;
+}
+
+[data-theme="orange"] {
+  --color-theme-100: #ffe9db;
+  --color-theme-200: #ffd3b8;
+  --color-theme-300: #ffbd94;
+  --color-theme-400: #ffa770;
+  --color-theme-500: #ff924c;
+  --color-theme-600: #ff680a;
+  --color-theme-700: #c74c00;
+  --color-theme-800: #853300;
+  --color-theme-900: #421900;
+}
+
+[data-theme="yellow"] {
+  --color-theme-100: #fff4d7;
+  --color-theme-200: #ffeaaf;
+  --color-theme-300: #ffdf88;
+  --color-theme-400: #ffd560;
+  --color-theme-500: #ffca3a;
+  --color-theme-600: #f9b700;
+  --color-theme-700: #bb8900;
+  --color-theme-800: #7c5b00;
+  --color-theme-900: #3e2e00;
+}
+
+[data-theme="green"] {
+  --color-theme-100: #e8f6d2;
+  --color-theme-200: #d2eea4;
+  --color-theme-300: #bbe577;
+  --color-theme-400: #a4dc49;
+  --color-theme-500: #8ac926;
+  --color-theme-600: #6fa11f;
+  --color-theme-700: #537917;
+  --color-theme-800: #38510f;
+  --color-theme-900: #1c2808;
+}
+
+[data-theme="blue"] {
+  --color-theme-100: #cce7f8;
+  --color-theme-200: #98cff2;
+  --color-theme-300: #65b7eb;
+  --color-theme-400: #31a0e4;
+  --color-theme-500: #1982c4;
+  --color-theme-600: #14679b;
+  --color-theme-700: #0f4e74;
+  --color-theme-800: #0a344e;
+  --color-theme-900: #051a27;
+}
+
+[data-theme="violet"] {
+  --color-theme-100: #e1d9ec;
+  --color-theme-200: #c3b4d8;
+  --color-theme-300: #a58ec5;
+  --color-theme-400: #8768b1;
+  --color-theme-500: #6a4c93;
+  --color-theme-600: #553d76;
+  --color-theme-700: #402e59;
+  --color-theme-800: #241b33;
+  --color-theme-900: #150f1e;
+}

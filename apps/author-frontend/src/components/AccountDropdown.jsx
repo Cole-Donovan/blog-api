@@ -26,6 +26,9 @@ function AccountDropdown({ onLogout }) {
     };
   }, []);
 
+  // Check if the user is logged in by checking for a token in localStorage
+  const isLoggedIn = !!localStorage.getItem("token");
+
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Account Button with inline SVG */}
@@ -44,7 +47,6 @@ function AccountDropdown({ onLogout }) {
         </svg>
       </button>
 
-
       {/* Dropdown Menu */}
       {isOpen && (
         <div className="absolute right-0 mt-2 w-72 bg-theme-800 rounded-md shadow-lg z-10 text-md">
@@ -56,17 +58,19 @@ function AccountDropdown({ onLogout }) {
               <ThemeSwitcher />
             </li>
             <hr className="border-t border-theme-900" />
-            <li>
-              {/* Add a wrapper to ensure the button stays within the rounded bounds */}
-              <div className="overflow-hidden">
-                <button
-                  onClick={onLogout}
-                  className="block w-full text-left px-4 py-4 hover:bg-theme-900"
-                >
-                  Log Out
-                </button>
-              </div>
-            </li>
+            {isLoggedIn && (
+              <li>
+                {/* Add a wrapper to ensure the button stays within the rounded bounds */}
+                <div className="overflow-hidden">
+                  <button
+                    onClick={onLogout}
+                    className="block w-full text-left px-4 py-4 hover:bg-theme-900"
+                  >
+                    Log Out
+                  </button>
+                </div>
+              </li>
+            )}
           </ul>
         </div>
       )}

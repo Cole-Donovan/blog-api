@@ -12,7 +12,7 @@ const DraftDetailsPage = () => {
   useEffect(() => {
     const fetchDraft = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/${id}`, {
+        const response = await fetch(`http://localhost:3000/posts/drafts/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -16,11 +16,14 @@ const router = express.Router();
 // Route to fetch all published posts (no authentication required)
 router.get('/published', getPublishedPosts);
 
+// Route to fetch an individual published post by ID (no authentication required)
+router.get('/published/:id', getPostById);
+
 // Route to fetch all draft posts (authentication required)
 router.get('/drafts', authenticateToken, getDraftPosts);
 
-// Route to fetch an individual post by ID (authentication required)
-router.get('/:id', authenticateToken, getPostById);
+// Route to fetch an individual draft post by ID (authentication required)
+router.get('/drafts/:id', authenticateToken, getPostById);
 
 // Route to create a post (protected, requires authentication)
 router.post('/', authenticateToken, createPost);

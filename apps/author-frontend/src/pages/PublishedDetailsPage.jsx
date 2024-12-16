@@ -12,7 +12,7 @@ const PublishedDetailsPage = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/${id}`, {
+        const response = await fetch(`http://localhost:3000/posts/published/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
