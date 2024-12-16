@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import SignUpForm from "../components/SignUpForm";
 
 const SignUpPage = () => {
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const navigate = useNavigate();
+  const [error, setError] = useState(""); // Error state
+  const [success, setSuccess] = useState(""); // Success state
+  const navigate = useNavigate(); // Navigate hook
 
   const handleSignUp = async (name, email, password) => {
     try {
@@ -14,7 +14,7 @@ const SignUpPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password }),  // Include name in the request body
+        body: JSON.stringify({ name, email, password }), // Include name in the request body
       });
 
       const data = await response.json();
@@ -31,11 +31,16 @@ const SignUpPage = () => {
   };
 
   return (
-    <div>
-      <SignUpForm onSignUp={handleSignUp} error={error} success={success} />
-      <button onClick={() => navigate("/login")}>
-        Login Instead
-      </button>
+    <div className="flex flex-col items-center justify-center">
+      <div className="w-full max-w-md">
+        <SignUpForm onSignUp={handleSignUp} error={error} success={success} />
+        <button
+          className="mt-4"
+          onClick={() => navigate("/login")}
+        >
+          Login Instead
+        </button>
+      </div>
     </div>
   );
 };

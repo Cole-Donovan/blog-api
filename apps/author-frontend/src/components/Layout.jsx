@@ -15,11 +15,15 @@ function Layout({ onLogout }) {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen min-w-screen bg-theme-700">
       <Header onLogout={handleLogout} />
-      <main>
-        <Outlet />
+      
+      <main className="flex-grow">
+        <div className="px-4 py-8 sm:py-12 sm:px-6 mx-auto max-w-screen-xl">
+          <Outlet />
+        </div>
       </main>
+      
       <Footer />
     </div>
   );

@@ -11,11 +11,11 @@ const LoginForm = ({ onLogin, error }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="shadow-lg rounded-lg p-8 bg-theme-900">
+      <h2 className="text-center mb-8">Login</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label>Email:</label>
+          <label className="block mb-1">Email:</label>
           <input
             type="email"
             value={email}
@@ -24,7 +24,7 @@ const LoginForm = ({ onLogin, error }) => {
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label className="block mb-1">Password:</label>
           <input
             type="password"
             value={password}
@@ -32,8 +32,15 @@ const LoginForm = ({ onLogin, error }) => {
             required
           />
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error */}
-        <button type="submit">Login</button>
+        {error && <p className="text-md text-center mt-2">{error}</p>}
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="justify-center mt-6 bg-theme-700 font-semibold py-2 px-8 rounded-lg shadow-md hover:bg-theme-600 focus:outline-none transition"
+          >
+            <span className="text-base">Login</span>
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -7,13 +7,26 @@ import SignUpPage from "./pages/SignUpPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CreatePostPage from "./pages/CreatePostPage";
 import DraftsPage from "./pages/DraftsPage";
-
+import DraftDetailsPage from "./pages/DraftDetailsPage";
+import PublishedDetailsPage from "./pages/PublishedDetailsPage"; // Import the new page
 
 function App() {
   const [token, setToken] = useState(null);
 
   // Check if the user is already logged in when the app loads
   useEffect(() => {
+    // Apply saved theme as soon as possible
+    const savedTheme = localStorage.getItem("theme");
+
+    // If no theme is saved, set the default theme (blue) and save it to localStorage
+    if (!savedTheme) {
+      document.documentElement.setAttribute("data-theme", "blue");
+      localStorage.setItem("theme", "blue"); // Save the default theme
+    } else {
+      document.documentElement.setAttribute("data-theme", savedTheme); // Apply saved theme
+    }
+
+    // Check for a saved token
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
@@ -60,6 +73,24 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={["AUTHOR"]}>
                 <DraftsPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* Protected route for viewing a specific draft */}
+          <Route
+            path="drafts/:id"
+            element={
+              <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                <DraftDetailsPage /> {/* This is the page displaying detailed draft */}
+              </ProtectedRoute>
+            }
+          />
+          {/* Protected route for viewing a specific published post */}
+          <Route
+            path="published/:id"
+            element={
+              <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                <PublishedDetailsPage /> {/* This is the page displaying detailed published post */}
               </ProtectedRoute>
             }
           />

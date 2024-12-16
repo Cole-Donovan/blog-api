@@ -20,7 +20,7 @@ const LoginPage = () => {
       const data = await response.json();
 
       // Log the entire response data for comparison
-      console.log("Login response data:", data);
+      // console.log("Login response data:", data);
 
       if (response.ok) {
         // Save the token and role in localStorage
@@ -41,9 +41,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <LoginForm onLogin={handleLogin} error={error} />
-      <button onClick={() => navigate("/signup")}>Create an Account</button>
+
+    <div className="flex flex-col items-center justify-center">
+      <div className="w-full max-w-md">
+        <LoginForm onLogin={handleLogin} error={error} />
+        <button className="mt-4" onClick={() => navigate("/signup")}>
+          Create an Account
+        </button>
+      </div>
     </div>
   );
 };

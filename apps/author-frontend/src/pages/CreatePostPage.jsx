@@ -36,19 +36,20 @@ const CreatePostPage = () => {
   };
 
   return (
-    <div>
-      <h1>Create New Post</h1>
-      <PostForm onSubmit={handlePostCreation} />
-      {success && (
-        <div style={{ marginTop: "20px", color: "green" }}>
-          <h3>{success}</h3>
-        </div>
-      )}
-      {error && (
-        <div style={{ marginTop: "20px", color: "red" }}>
-          <h3>{error}</h3>
-        </div>
-      )}
+    <div className="flex flex-col items-center justify-center">
+      <div className="w-full max-w-2xl bg-theme-900 rounded-lg shadow-lg">
+        <PostForm onSubmit={handlePostCreation} />
+        {success && (
+          <div className="mt-4 p-4 bg-green-600 text-white rounded">
+            <h3>{success}</h3>
+          </div>
+        )}
+        {error && (
+          <div className="mt-4 p-4 bg-red-600 text-white rounded">
+            <h3>{error}</h3>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
