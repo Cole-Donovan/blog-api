@@ -9,7 +9,6 @@ async function clearDatabase() {
   // Then delete posts
   await prisma.post.deleteMany({});
   
-  console.log('Database cleared!');
 }
 
 async function seedDatabase() {
