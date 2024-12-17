@@ -45,14 +45,19 @@ const BlogPostList = ({ viewMode }) => {
       {posts.length === 0 ? (
         <p>No posts available</p> // Show message if no posts
       ) : (
-        posts.map((post) => (
-          <div key={post.id}>
-            <BlogPost post={post} viewMode={viewMode} />
-          </div>
-        ))
+        posts.map((post) => {
+          console.log('Post:', post); // Log the post object
+          console.log('Comments:', post.comments); // Log the comments for the post
+          return (
+            <div key={post.id}>
+              <BlogPost post={post} viewMode={viewMode} />
+            </div>
+          );
+        })
       )}
     </div>
   );
+  
 };
 
 export default BlogPostList;

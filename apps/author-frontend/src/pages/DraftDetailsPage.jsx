@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import CommentSection from '../components/CommentSection';
 
 const DraftDetailsPage = () => {
   const { id } = useParams(); // Get the draft ID from the URL
@@ -148,7 +149,7 @@ const DraftDetailsPage = () => {
         )}
       </div>
 
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 mb-16">
         {/* Button to enable edit mode */}
         {!isEditing && (
           <button
@@ -189,6 +190,7 @@ const DraftDetailsPage = () => {
           </button>
         )}
       </div>
+      <CommentSection postId={id} />
     </div>
   );
 };

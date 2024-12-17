@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import CommentSection from '../components/CommentSection';
 
 const PublishedDetailsPage = () => {
   const { id } = useParams(); // Get the post ID from the URL
@@ -42,9 +43,10 @@ const PublishedDetailsPage = () => {
       <p className="mb-4"><strong>Published At:</strong> {new Date(post.publishedAt).toLocaleDateString()}</p>
 
       {/* Display post content */}
-      <div className="mb-6">
+      <div className="mb-32">
         <p>{post.content}</p>
       </div>
+      <CommentSection postId={id} /> {/* Pass postId as id */}
     </div>
   );
 };

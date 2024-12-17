@@ -6,10 +6,11 @@ const getPublishedPosts = async (req, res) => {
   try {
     const posts = await prisma.post.findMany({
       where: {
-        published: true, // Filter for published posts
+        published: true,
       },
       include: {
-        author: { select: { id: true, name: true, email: true } }, // Include author info
+        author: { select: { id: true, name: true, email: true } },
+        _count: { select: { comments: true } },  // Include the comment count
       },
     });
 
@@ -20,6 +21,8 @@ const getPublishedPosts = async (req, res) => {
   }
 };
 
+
+
 // Fetch all draft posts
 const getDraftPosts = async (req, res) => {
   try {
@@ -29,6 +32,7 @@ const getDraftPosts = async (req, res) => {
       },
       include: {
         author: { select: { id: true, name: true, email: true } }, // Include author info
+        _count: { select: { comments: true } },  // Include the comment count
       },
     });
 
@@ -41,10 +45,9 @@ const getDraftPosts = async (req, res) => {
 
 // Fetch an individual post by ID
 const getPostById = async (req, res) => {
-  const { id } = req.params;  // Get the post ID from the URL
+  const { id } = req.params; // Get the post ID from the URL
 
   try {
-    // Fetch the post with author details
     const post = await prisma.post.findUnique({
       where: { id: Number(id) },
       include: {
@@ -58,10 +61,11 @@ const getPostById = async (req, res) => {
 
     res.status(200).json(post);
   } catch (err) {
-    console.error("Error fetching post:", err);
+    console.error('Error fetching post:', err);
     res.status(500).json({ error: 'Error fetching post' });
   }
 };
+
 
 // Create a post (only available for users with "AUTHOR" role)
 const createPost = async (req, res) => {
@@ -239,6 +243,82 @@ const unpublishPost = async (req, res) => {
   }
 };
 
+// Fetch all comments for a specific post
+const getCommentsByPostId = async (req, res) => {
+  const { id } = req.params;  // Extract 'id' from the request parameters
+
+  try {
+    const comments = await prisma.comment.findMany({
+      where: { postId: Number(id) },  // Ensure postId is a number
+      orderBy: {
+        createdAt: 'desc',  // Order comments by creation date, newest first
+      },
+    });
+
+    res.status(200).json(comments);
+  } catch (err) {
+    console.error("Error fetching comments:", err);
+    res.status(500).json({ error: 'Failed to fetch comments' });
+  }
+};
+
+
+// Create a new comment for a specific post
+const createComment = async (req, res) => {
+  const { content, name } = req.body;  // Comment content and author name
+  const { id } = req.params;  // Get the post ID from the URL parameter
+
+  try {
+    // Ensure the post exists before creating the comment
+    const post = await prisma.post.findUnique({
+      where: { id: Number(id) },  // Ensure 'id' is converted to a number
+    });
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    // Create the comment
+    const comment = await prisma.comment.create({
+      data: {
+        content,
+        name: name || 'Anonymous',  // Default to 'Anonymous' if name is not provided
+        postId: Number(id),  // Link comment to the specified post
+      },
+    });
+
+    res.status(201).json(comment);  // Respond with the created comment
+  } catch (err) {
+    console.error("Error creating comment:", err);
+    res.status(500).json({ error: 'Failed to create comment' });
+  }
+};
+
+const deleteComment = async (req, res) => {
+  const { postId, commentId } = req.params;
+
+  try {
+    // Check if the comment exists
+    const comment = await prisma.comment.findUnique({
+      where: { id: Number(commentId) },
+    });
+
+    if (!comment) {
+      return res.status(404).json({ message: 'Comment not found' });
+    }
+
+    // Delete the comment
+    await prisma.comment.delete({
+      where: { id: Number(commentId) },
+    });
+
+    return res.status(200).json({ message: 'Comment deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'An error occurred while deleting the comment' });
+  }
+};
+
 export { 
   getPostById, 
   createPost, 
@@ -247,5 +327,8 @@ export {
   editPostContent,
   getPublishedPosts, 
   getDraftPosts, 
-  deletePost 
+  deletePost,
+  getCommentsByPostId,
+  createComment,
+  deleteComment
 };

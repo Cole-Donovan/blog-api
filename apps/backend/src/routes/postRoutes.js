@@ -7,7 +7,10 @@ import {
   publishPost, 
   unpublishPost, 
   deletePost, 
-  editPostContent
+  editPostContent,
+  getCommentsByPostId,
+  createComment,
+  deleteComment // Import the new deleteComment function
 } from '../controllers/postController.js';  
 import authenticateToken from '../middlewares/authMiddleware.js';
 
@@ -39,5 +42,14 @@ router.delete('/:id', authenticateToken, deletePost);
 
 // Route to edit a post's content or title (protected, requires authentication and authorization)
 router.patch('/:id/edit', authenticateToken, editPostContent);
+
+// Route to fetch all comments for a specific post (no authentication required)
+router.get('/:id/comments', getCommentsByPostId);
+
+// Route to create a new comment for a specific post (no authentication required)
+router.post('/:id/comments', createComment);
+
+// Route to delete a comment (protected, requires authentication and authorization)
+router.delete('/:id/comments/:commentId', authenticateToken, deleteComment);  // Proper format for deleting comment
 
 export default router;
