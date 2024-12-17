@@ -9,7 +9,8 @@ const LoginPage = () => {
   // Handle the login logic
   const handleLogin = async (email, password) => {
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      const response = await fetch("${apiUrl}/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

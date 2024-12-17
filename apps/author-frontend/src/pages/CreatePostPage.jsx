@@ -11,8 +11,8 @@ const CreatePostPage = () => {
   const handlePostCreation = async (title, content) => {
     try {
       const token = localStorage.getItem("token"); // Retrieve token from localStorage
-
-      const response = await fetch("http://localhost:3000/posts", {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      const response = await fetch("${apiUrl}/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

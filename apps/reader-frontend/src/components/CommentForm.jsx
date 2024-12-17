@@ -5,6 +5,7 @@ const CommentForm = ({ postId, onCommentSubmit }) => {
   const [name, setName] = useState('Anonymous'); // Default value for the name
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ const CommentForm = ({ postId, onCommentSubmit }) => {
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+      const response = await fetch(`${apiUrl}/posts/${postId}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

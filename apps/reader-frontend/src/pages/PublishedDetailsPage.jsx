@@ -5,11 +5,12 @@ import CommentSection from '../components/CommentSection';
 const PublishedDetailsPage = () => {
   const { id } = useParams(); // Get the post ID from the URL
   const [post, setPost] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/published/${id}`, {
+        const response = await fetch(`${apiUrl}/posts/published/${id}`, {
           headers: {
             "Content-Type": "application/json",
           },

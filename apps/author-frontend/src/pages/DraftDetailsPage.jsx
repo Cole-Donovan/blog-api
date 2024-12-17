@@ -9,11 +9,12 @@ const DraftDetailsPage = () => {
   const [isEditing, setIsEditing] = useState(false); // To track if we're in edit mode
   const [newTitle, setNewTitle] = useState(''); // To store new title while editing
   const [newContent, setNewContent] = useState(''); // To store new content while editing
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchDraft = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/drafts/${id}`, {
+        const response = await fetch(`${apiUrl}/posts/drafts/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -38,7 +39,7 @@ const DraftDetailsPage = () => {
 
   const handlePublish = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/posts/${id}/publish`, {
+      const response = await fetch(`${apiUrl}/posts/${id}/publish`, {
         method: 'PATCH',
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +63,7 @@ const DraftDetailsPage = () => {
       const confirmDelete = window.confirm("Are you sure you want to delete this draft?");
       if (!confirmDelete) return;
 
-      const response = await fetch(`http://localhost:3000/posts/${id}`, {
+      const response = await fetch(`${apiUrl}/posts/${id}`, {
         method: 'DELETE',
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +88,7 @@ const DraftDetailsPage = () => {
 
   const handleSaveChanges = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/posts/${id}/edit`, {
+      const response = await fetch(`${apiUrl}/posts/${id}/edit`, {
         method: 'PATCH',
         headers: {
           "Content-Type": "application/json",

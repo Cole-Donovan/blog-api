@@ -11,9 +11,10 @@ const BlogPostList = ({ viewMode }) => {
     const fetchPosts = async () => {
       setLoading(true); // Start loading
       try {
+        const apiUrl = process.env.REACT_APP_API_URL;
         const url = viewMode === 'draft' 
-          ? 'http://localhost:3000/posts/drafts'  // For drafts
-          : 'http://localhost:3000/posts/published'; // For published posts
+          ? '${apiUrl}/posts/drafts'  // For drafts
+          : '${apiUrl}/posts/published'; // For published posts
 
         const response = await fetch(url, {
           headers: {

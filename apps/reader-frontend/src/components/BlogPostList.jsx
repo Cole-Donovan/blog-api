@@ -5,12 +5,13 @@ const BlogPostList = () => {
   const [posts, setPosts] = useState([]); // State for posts
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(""); // Error state
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true); // Start loading
       try {
-        const response = await fetch('http://localhost:3000/posts/published', {
+        const response = await fetch('${apiUrl}/posts/published', {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`, // Authorization header

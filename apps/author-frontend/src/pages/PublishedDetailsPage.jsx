@@ -10,11 +10,12 @@ const PublishedDetailsPage = () => {
   const [isEditing, setIsEditing] = useState(false); // To track if we're in edit mode
   const [newTitle, setNewTitle] = useState(''); // To store new title while editing
   const [newContent, setNewContent] = useState(''); // To store new content while editing
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/published/${id}`, {
+        const response = await fetch(`${apiUrl}/posts/published/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,7 +43,7 @@ const PublishedDetailsPage = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/posts/${id}`, {
+      const response = await fetch(`${apiUrl}/posts/${id}`, {
         method: 'DELETE',
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +66,7 @@ const PublishedDetailsPage = () => {
     if (!confirmUnpublish) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/posts/${id}/unpublish`, {
+      const response = await fetch(`${apiUrl}/posts/${id}/unpublish`, {
         method: 'PATCH',
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +91,7 @@ const PublishedDetailsPage = () => {
 
   const handleSaveChanges = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/posts/${id}/edit`, {
+      const response = await fetch(`${apiUrl}/posts/${id}/edit`, {
         method: 'PATCH',
         headers: {
           "Content-Type": "application/json",

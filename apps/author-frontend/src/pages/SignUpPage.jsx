@@ -9,7 +9,8 @@ const SignUpPage = () => {
 
   const handleSignUp = async (name, email, password) => {
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      const response = await fetch("${apiUrl}/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

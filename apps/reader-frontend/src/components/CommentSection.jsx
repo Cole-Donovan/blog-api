@@ -6,12 +6,13 @@ const CommentSection = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);  // Loading state
   const [error, setError] = useState(null);      // Error state
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   // Fetch comments for the post when the component mounts
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/${postId}/comments`);
+        const response = await fetch(`${apiUrl}/posts/${postId}/comments`);
         if (!response.ok) {
           throw new Error('Failed to fetch comments');
         }
