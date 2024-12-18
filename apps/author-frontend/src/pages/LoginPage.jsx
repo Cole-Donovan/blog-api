@@ -10,7 +10,7 @@ const LoginPage = () => {
   const handleLogin = async (email, password) => {
     try {
       const apiUrl = import.meta.env.VITE_BACKEND_URL;
-      const response = await fetch("${apiUrl}/auth/login", {
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

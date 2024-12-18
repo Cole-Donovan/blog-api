@@ -11,7 +11,7 @@ const BlogPostList = () => {
     const fetchPosts = async () => {
       setLoading(true); // Start loading
       try {
-        const response = await fetch('${apiUrl}/posts/published', {
+        const response = await fetch(`${apiUrl}/posts/published`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`, // Authorization header

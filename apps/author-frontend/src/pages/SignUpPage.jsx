@@ -10,7 +10,7 @@ const SignUpPage = () => {
   const handleSignUp = async (name, email, password) => {
     try {
       const apiUrl = import.meta.env.VITE_BACKEND_URL;
-      const response = await fetch("${apiUrl}/auth/register", {
+      const response = await fetch(`${apiUrl}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

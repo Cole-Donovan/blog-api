@@ -12,7 +12,7 @@ const CreatePostPage = () => {
     try {
       const token = localStorage.getItem("token"); // Retrieve token from localStorage
       const apiUrl = import.meta.env.VITE_BACKEND_URL;
-      const response = await fetch("${apiUrl}/posts", {
+      const response = await fetch(`${apiUrl}/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

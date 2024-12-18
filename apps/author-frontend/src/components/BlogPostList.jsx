@@ -13,8 +13,8 @@ const BlogPostList = ({ viewMode }) => {
       try {
         const apiUrl = import.meta.env.VITE_BACKEND_URL;
         const url = viewMode === 'draft' 
-          ? '${apiUrl}/posts/drafts'  // For drafts
-          : '${apiUrl}/posts/published'; // For published posts
+          ? `${apiUrl}/posts/drafts`  // For drafts
+          : `${apiUrl}/posts/published`; // For published posts
 
         const response = await fetch(url, {
           headers: {
