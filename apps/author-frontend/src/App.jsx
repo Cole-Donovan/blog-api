@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -55,43 +55,61 @@ function App() {
           <Route
             index
             element={
-              <ProtectedRoute allowedRoles={["AUTHOR"]}>
-                <HomePage />
-              </ProtectedRoute>
+              token ? (
+                <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                  <HomePage />
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
           <Route
             path="create-post"
             element={
-              <ProtectedRoute allowedRoles={["AUTHOR"]}>
-                <CreatePostPage />
-              </ProtectedRoute>
+              token ? (
+                <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                  <CreatePostPage />
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
           <Route
             path="drafts"
             element={
-              <ProtectedRoute allowedRoles={["AUTHOR"]}>
-                <DraftsPage />
-              </ProtectedRoute>
+              token ? (
+                <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                  <DraftsPage />
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
-          {/* Protected route for viewing a specific draft */}
           <Route
             path="drafts/:id"
             element={
-              <ProtectedRoute allowedRoles={["AUTHOR"]}>
-                <DraftDetailsPage /> {/* This is the page displaying detailed draft */}
-              </ProtectedRoute>
+              token ? (
+                <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                  <DraftDetailsPage /> {/* This is the page displaying detailed draft */}
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
-          {/* Protected route for viewing a specific published post */}
           <Route
             path="published/:id"
             element={
-              <ProtectedRoute allowedRoles={["AUTHOR"]}>
-                <PublishedDetailsPage /> {/* This is the page displaying detailed published post */}
-              </ProtectedRoute>
+              token ? (
+                <ProtectedRoute allowedRoles={["AUTHOR"]}>
+                  <PublishedDetailsPage /> {/* This is the page displaying detailed published post */}
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/login" />
+              )
             }
           />
           {/* Public routes */}
