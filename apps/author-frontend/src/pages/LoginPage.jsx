@@ -9,7 +9,7 @@ const LoginPage = () => {
   // Handle the login logic
   const handleLogin = async (email, password) => {
     try {
-      const apiUrl = process.env.REACT_APP_API_URL;
+      const apiUrl = import.meta.env.VITE_BACKEND_URL;
       const response = await fetch("${apiUrl}/auth/login", {
         method: "POST",
         headers: {

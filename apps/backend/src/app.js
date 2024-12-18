@@ -5,12 +5,16 @@ import postRoutes from './routes/postRoutes.js';
 
 const app = express();
 
-// Middleware
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+  ? process.env.ALLOWED_ORIGINS.split(',') 
+  : ['http://localhost:5173', 'http://localhost:5174', 'https://colesblogproject.netlify.app/'];
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174'], // Allow both frontends
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   credentials: true
 }));
+
 
 app.use(express.json());
 

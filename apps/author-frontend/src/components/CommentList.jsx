@@ -8,7 +8,7 @@ const CommentList = ({ comments, onDeleteComment, postId }) => {
     if (!isConfirmed) return;  // If user cancels, stop the deletion
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL;
+      const apiUrl = import.meta.env.VITE_BACKEND_URL;
       const response = await fetch(`${apiUrl}/posts/${postId}/comments/${commentId}`, {
         method: 'DELETE',
         headers: {

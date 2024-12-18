@@ -10,7 +10,7 @@ const CommentSection = ({ postId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL;
+        const apiUrl = import.meta.env.VITE_BACKEND_URL;
         const response = await fetch(`${apiUrl}/posts/${postId}/comments`);
         if (!response.ok) {
           throw new Error('Failed to fetch comments');

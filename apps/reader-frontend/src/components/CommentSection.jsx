@@ -6,7 +6,7 @@ const CommentSection = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);  // Loading state
   const [error, setError] = useState(null);      // Error state
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
   // Fetch comments for the post when the component mounts
   useEffect(() => {

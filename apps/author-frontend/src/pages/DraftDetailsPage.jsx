@@ -9,7 +9,7 @@ const DraftDetailsPage = () => {
   const [isEditing, setIsEditing] = useState(false); // To track if we're in edit mode
   const [newTitle, setNewTitle] = useState(''); // To store new title while editing
   const [newContent, setNewContent] = useState(''); // To store new content while editing
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchDraft = async () => {

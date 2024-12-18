@@ -5,7 +5,7 @@ const CommentForm = ({ postId, onCommentSubmit }) => {
   const [name, setName] = useState('Anonymous'); // Default value for the name
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

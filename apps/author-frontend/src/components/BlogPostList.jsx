@@ -11,7 +11,7 @@ const BlogPostList = ({ viewMode }) => {
     const fetchPosts = async () => {
       setLoading(true); // Start loading
       try {
-        const apiUrl = process.env.REACT_APP_API_URL;
+        const apiUrl = import.meta.env.VITE_BACKEND_URL;
         const url = viewMode === 'draft' 
           ? '${apiUrl}/posts/drafts'  // For drafts
           : '${apiUrl}/posts/published'; // For published posts

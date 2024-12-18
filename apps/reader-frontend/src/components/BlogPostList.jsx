@@ -5,7 +5,7 @@ const BlogPostList = () => {
   const [posts, setPosts] = useState([]); // State for posts
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(""); // Error state
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchPosts = async () => {

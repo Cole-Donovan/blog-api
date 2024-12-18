@@ -5,7 +5,7 @@ import CommentSection from '../components/CommentSection';
 const PublishedDetailsPage = () => {
   const { id } = useParams(); // Get the post ID from the URL
   const [post, setPost] = useState(null);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchPost = async () => {

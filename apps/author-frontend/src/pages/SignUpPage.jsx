@@ -9,7 +9,7 @@ const SignUpPage = () => {
 
   const handleSignUp = async (name, email, password) => {
     try {
-      const apiUrl = process.env.REACT_APP_API_URL;
+      const apiUrl = import.meta.env.VITE_BACKEND_URL;
       const response = await fetch("${apiUrl}/auth/register", {
         method: "POST",
         headers: {

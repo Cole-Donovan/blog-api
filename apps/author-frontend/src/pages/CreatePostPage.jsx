@@ -11,7 +11,7 @@ const CreatePostPage = () => {
   const handlePostCreation = async (title, content) => {
     try {
       const token = localStorage.getItem("token"); // Retrieve token from localStorage
-      const apiUrl = process.env.REACT_APP_API_URL;
+      const apiUrl = import.meta.env.VITE_BACKEND_URL;
       const response = await fetch("${apiUrl}/posts", {
         method: "POST",
         headers: {
